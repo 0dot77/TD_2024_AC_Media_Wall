@@ -1,0 +1,260 @@
+ /* 기본 스타일 초기화 */
+ *,
+ *::before,
+ *::after {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
+
+ html {
+     font-size: 16px;
+     -webkit-text-size-adjust: 100%;
+ }
+
+ html,
+ body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+ }
+
+ img,
+ picture,
+ video,
+ canvas,
+ svg {
+     display: block;
+     max-width: 100%;
+ }
+
+ input,
+ button,
+ textarea,
+ select {
+     font: inherit;
+ }
+
+ p,
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6 {
+     overflow-wrap: break-word;
+ }
+
+ /* 커스텀 스타일링 */
+
+ body {
+     font-family: 'Noto Sans KR', sans-serif;
+     line-height: 1.5;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     display: flex;
+     flex-direction: column;
+     background-color: #ffffff;
+ }
+
+ h1 {
+     font-family: 'Lexend Mega', sans-serif;
+     font-size: 80px;
+     text-align: center;
+     margin-bottom: 3rem;
+ }
+
+ .container {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-around;
+     flex-grow: 1;
+
+ }
+
+ .column {
+     margin-bottom: 20px;
+     padding: 20px;
+     box-sizing: border-box;
+     flex: 1;
+     min-width: 200px;
+ }
+
+ .column:nth-child(1),
+ .column:nth-child(3) {
+     flex: 0 0 25%;
+ }
+
+ .column:nth-child(2) {
+     flex: 0 0 50%;
+     border-left: 3px solid #000;
+     border-right: 3px solid #000;
+ }
+
+ .column:nth-child(2) .content {
+     display: none;
+ }
+
+ .column:nth-child(2) .content:target,
+ .column:nth-child(2) #upload {
+     display: block;
+ }
+
+ .column:nth-child(2) .content:target~#upload {
+     display: none;
+ }
+
+
+ /* 미디어쿼리 */
+
+ @media (max-width: 768px) {
+     .container {
+         flex-direction: column;
+     }
+
+     .column {
+         width: 100%;
+         min-width: auto;
+     }
+
+     .column:nth-child(1),
+     .column:nth-child(2),
+     .column:nth-child(3) {
+         flex: 0 0 100%;
+     }
+
+     .column:nth-child(2) {
+         border-left: none;
+         border-right: none;
+         border-top: 1px solid #ccc;
+         border-bottom: 1px solid #ccc;
+     }
+ }
+
+ /* nav */
+ nav {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size : 1.5rem;
+     font-weight: 700;
+ }
+
+
+ nav ul {
+     list-style-type: none;
+ }
+
+ nav ul li {
+     margin-bottom: 1rem;
+     padding-bottom: 0.25rem;
+ }
+
+ a {
+     text-decoration: none;
+ }
+
+ nav ul li a {
+     color: black;
+ }
+
+ /* #current:target ~ #nav-current,
+ #past:target ~ #nav-past,
+ #upload:target ~ #nav-upload {
+     border-bottom: 1px solid black;
+ } */
+
+ /* 2열, #upload */
+ .upload-form {
+     display: flex;
+     flex-direction: column;
+     background-color: #f0f0f0;
+     padding: 1rem;
+     gap: 10px;
+ }
+
+ .form-group {
+     margin-bottom: 15px;
+     padding: 1rem;
+ }
+
+ label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: 700;
+     font-size: 1.25rem;
+ }
+
+ input[type="text"] {
+     font-family: 'Lexend Mega', sans-serif;
+ }
+
+ input[type="text"],
+ input[type="password"] {
+     width: 100%;
+     padding: 8px;
+     box-sizing: border-box;
+     border : 2px solid #000;
+ }
+
+ .date-range {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .date-range input {
+     width: 45%;
+     text-align: center;
+     font-size: 1.5rem;
+ }
+
+ .file-upload {
+     border: 2px dashed #ddd;
+     padding: 10rem;
+     text-align: center;
+     cursor: pointer;
+ }
+
+ .save-btn {
+     background-color: #000;
+     color: #fff;
+     border: none;
+     padding: 10px 20px;
+     cursor: pointer;
+     width: 20%;
+     align-self: center;
+     font-family: 'Lexend Mega', sans-serif;
+ }
+
+ #upload {
+     h2 {
+         margin-top: 1rem;
+         margin-bottom: 1rem;
+     }
+ }
+
+
+ /* 3열, 안내 */
+
+ .column:nth-child(3) {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     padding:2rem;
+ }
+
+
+ .notion,
+ .contact {
+     h2 {
+         font-family: 'Lexend Mega', sans-serif;
+         margin-bottom: 0.5rem;
+     }
+ }
+
+ .notion {
+     display: flex;
+     flex-direction: column;
+     margin-bottom: 2rem;
+ }
