@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap"
+        rel="stylesheet">
+    <title>AC Media Wall 🎨</title>
+    <style>
+        /* 기본 스타일 초기화 */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        img,
+        picture,
+        video,
+        canvas,
+        svg {
+            display: block;
+            max-width: 100%;
+        }
+
+        input,
+        button,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            overflow-wrap: break-word;
+        }
+
+        /* 커스텀 스타일링 */
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            font-family: 'Lexend Mega', sans-serif;
+            font-size: 80px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            flex-grow: 1;
+
+        }
+
+        .column {
+            margin-bottom: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .column:nth-child(1),
+        .column:nth-child(3) {
+            flex: 0 0 25%;
+        }
+
+        .column:nth-child(2) {
+            flex: 0 0 50%;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+
+        .column:nth-child(2) .content {
+            display: none;
+        }
+
+        .column:nth-child(2) .content:target,
+        .column:nth-child(2) #upload {
+            display: block;
+        }
+
+        .column:nth-child(2) .content:target~#upload {
+            display: none;
+        }
+
+
+        /* 미디어쿼리 */
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .column {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .column:nth-child(1),
+            .column:nth-child(2),
+            .column:nth-child(3) {
+                flex: 0 0 100%;
+            }
+
+            .column:nth-child(2) {
+                border-left: none;
+                border-right: none;
+                border-top: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+
+        /* nav */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .column:nth-child(2) #current:target~nav ul li a[href="#current"],
+        .column:nth-child(2) #past:target~nav ul li a[href="#past"],
+        .column:nth-child(2) #upload:target~nav ul li a[href="#upload"] {
+            text-decoration: underline;
+        }
+
+        /* 2열, #upload */
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f0f0;
+            padding: 1rem;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+            padding: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            font-family: 'Lexend Mega', sans-serif;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .date-range {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-range input {
+            width: 45%;
+        }
+
+        .file-upload {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 20%;
+            align-self: center;
+            font-family: 'Lexend Mega', sans-serif;
+        }
+
+        #upload {
+            h2 {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+
+        /* 3열, 안내 */
+        .notion,
+        .contact {
+            h2 {
+                font-family: 'Lexend Mega', sans-serif;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <div class="column">
+            <h1>IMW</h1>
+            <nav>
+                <ul>
+                    <li><a href="#upload">새로운 포스터 업로드</a></li>
+                    <li><a href="#current">현재 포스터</a></li>
+                    <li><a href="#past">지난 포스터 보기</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="column">
+            <div id="current" class="content">
+                <div></div>
+            </div>
+            <div id="past" class="content">
+                <h2>지난 포스터 보기</h2>
+                <p>저장된, 기한이 지난 포스터를 살펴볼 수 있습니다.</p>
+                <img src="logo" alt="ddd"/>
+            </div>
+            <div id="upload" class="content">
+                <div>
+                    <h2>등록자 정보</h2>
+                    <form action="formExample" method="get" class="upload-form">
+                        <label for="name">1. 이름</label>
+                        <input type="text" name="name" placeholder="이름" required>
+                        <label for="phone">2. 전화번호</label>
+                        <input type="text" name="phone" placeholder="전화번호" required>
+                        <input type="submit" name="action" value="save">
+                    </form>
+
+                    <h2>공연 정보</h2>
+                    <form class="upload-form">
+                        <label>1. 게시 기간</label>
+                        <div class="date-range">
+                            <input type="text" placeholder="YY.MM.DD">
+                            <span>~</span>
+                            <input type="text" placeholder="YY.MM.DD">
+                        </div>
+                        <label>2. 공연명</label>
+                        <input type="text">
+                        <label>3. 포스터 이미지 업로드</label>
+                        <div class="file-upload">
+                            이곳에 이미지를 끌어넣어주세요
+                        </div>
+                        <label>4. 비밀번호</label>
+                        <input type="password">
+                        <button type="submit" class="save-btn">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div>
+                <p>
+                    이곳은 한국예술종합학교 이어령 예술극장 미디어월에 삽입되는 공연 포스터를 업로드할 수 있는 웹페이지 입니다.
+                    아래의 내용을 확인하여 미디어월에 새로운 포스터를 업로드 할 수 있습니다.
+                </p>
+            </div>
+            <div>
+                <div class="notion">
+                    <h2>Notion</h2>
+                    <ul>
+                        <li>파일 크기 : 10MB 이하</li>
+                        <li>확장자 : jpg, png, pdf</li>
+                        <li>최적 사이즈 : 1080*340(px)</li>
+                    </ul>
+                </div>
+                <div class="contact">
+                    <h2>Contact</h2>
+                    <p>유태양 : 010-9964-3323</p>
+                </div>
+            </div>
+    </main>
+</body>
+</html>
